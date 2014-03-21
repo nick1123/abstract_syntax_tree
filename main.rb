@@ -1,27 +1,27 @@
 class Expression
-  def initialize(depth=0)
+  def initialize(variable_terminals=['x'], depth=0)
     @operator  = get_operator
-    @operand_1 = get_operand(depth)
-    @operand_2 = get_operand(depth)
+    @operand_1 = get_operand(variable_terminals, depth)
+    @operand_2 = get_operand(variable_terminals, depth)
   end
 
   def get_operator
     ['+', '-', '*', '/'].sample
   end
 
-  def get_operand(depth)
+  def get_operand(variable_terminals, depth)
     if rand > (1/(2**depth))
-      op = get_terminal
+      op = get_terminal(variable_terminals)
     else
-      op = Expression.new(depth + 1)
+      op = Expression.new(variable_terminals, depth + 1)
     end
 
     return op
   end
 
-  def get_terminal
+  def get_terminal(variable_terminals)
     if rand > 0.5
-      t = 'x'
+      t = variable_terminals.sample
     else
       t = (10 * rand).round(1)
       if rand > 0.5
@@ -38,7 +38,7 @@ class Expression
 end
 
 10.times do
-  e = Expression.new
+  e = Expression.new(['x', 'y', 'z'])
   puts e.to_s
 end
 
