@@ -10,7 +10,7 @@ class Expression
   end
 
   def get_operand(variable_terminals, depth)
-    if rand > (1/(2**depth))
+    if rand > (1/(2**depth) + 0.05)
       op = get_terminal(variable_terminals)
     else
       op = Expression.new(variable_terminals, depth + 1)
