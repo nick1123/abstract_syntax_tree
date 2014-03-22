@@ -14,7 +14,7 @@ class Expression
     if rand > (1/(2**depth) + 0.05)
       op = create_terminal(variable_terminals)
     else
-      op = Expression::Base.create(variable_terminals, depth + 1)
+      op = ::Expression.create(variable_terminals, depth + 1)
     end
 
     return op
