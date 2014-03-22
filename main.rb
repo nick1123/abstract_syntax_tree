@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + '/lib/*/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each {|file| require file }
 
 class TernaryExpression < Expression::Base
   def initialize(variable_terminals, depth)
@@ -47,7 +47,7 @@ class UnaryExpression < Expression::Base
 end
 
 10.times do
-  e = Expression::Base.create
+  e = Expression.create
   puts e.to_s
 end
 
