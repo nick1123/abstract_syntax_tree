@@ -4,8 +4,8 @@ class Expression
   class TernaryExpression
     def initialize(variable_terminals, depth)
       @operator  = get_operator
-      @operand_1 = ::Expression::OperandCreator.create(variable_terminals, depth)
-      @operand_2 = ::Expression::OperandCreator.create(variable_terminals, depth)
+      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
+      @operand_2 = ::Expression.create_operand(variable_terminals, depth)
       @conditional = ConditionalExpression.new(variable_terminals, depth)
     end
 
@@ -20,7 +20,7 @@ class Expression
   class BinaryExpression < Expression::Base
     def initialize(variable_terminals, depth)
       super
-      @operand_2 = ::Expression::OperandCreator.create(variable_terminals, depth)
+      @operand_2 = ::Expression.create_operand(variable_terminals, depth)
     end
 
     def get_operator
