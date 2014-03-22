@@ -21,7 +21,7 @@ class Expression
   end
 
   def self.create_terminal(variable_terminals)
-    rand > 0.5 ? variable_terminals.sample : create_float
+    rand > 0.5 ? variable_terminals.sample : create_float.to_s
   end
 
   def self.create_float
