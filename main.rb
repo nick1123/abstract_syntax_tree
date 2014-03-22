@@ -1,22 +1,6 @@
 Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each {|file| require file }
 
 class Expression
-  class Ternary
-    def initialize(variable_terminals, depth)
-      @operator  = get_operator
-      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
-      @operand_2 = ::Expression.create_operand(variable_terminals, depth)
-      @conditional = ::Expression::Conditional.new(variable_terminals, depth)
-    end
-
-    def get_operator
-    end
-
-    def to_s
-      "( " + @conditional.to_s + " ? " + @operand_1.to_s + " : " +  @operand_2.to_s + " )"
-    end
-  end
-
   class Binary
     def initialize(variable_terminals, depth)
       @operator  = get_operator
