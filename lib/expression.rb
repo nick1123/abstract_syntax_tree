@@ -12,12 +12,23 @@ class Expression
 
   def self.create_operand(variable_terminals, depth)
     if rand > (1/(2**depth) + 0.05)
-      op = Terminal.new(variable_terminals)
+      op = create_terminal(variable_terminals)
     else
       op = Expression::Base.create(variable_terminals, depth + 1)
     end
 
     return op
   end
+
+  def self.create_terminal(variable_terminals)
+    rand > 0.5 ? variable_terminals.sample : create_float
+  end
+
+  def self.create_float
+    n = (10 * rand).round(1)
+    n *= -1 if rand > 0.5
+    return n
+  end
+
 end
 
