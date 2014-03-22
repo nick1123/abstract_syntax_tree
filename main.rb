@@ -1,12 +1,12 @@
 Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each {|file| require file }
 
 class Expression
-  class TernaryExpression
+  class Ternary
     def initialize(variable_terminals, depth)
       @operator  = get_operator
       @operand_1 = ::Expression.create_operand(variable_terminals, depth)
       @operand_2 = ::Expression.create_operand(variable_terminals, depth)
-      @conditional = ConditionalExpression.new(variable_terminals, depth)
+      @conditional = ::Expression::Conditional.new(variable_terminals, depth)
     end
 
     def get_operator
@@ -17,7 +17,7 @@ class Expression
     end
   end
 
-  class BinaryExpression
+  class Binary
     def initialize(variable_terminals, depth)
       @operator  = get_operator
       @operand_1 = ::Expression.create_operand(variable_terminals, depth)
@@ -33,7 +33,7 @@ class Expression
     end
   end
 
-  class ConditionalExpression
+  class Conditional
     def initialize(variable_terminals, depth)
       @operator  = get_operator
       @operand_1 = ::Expression.create_operand(variable_terminals, depth)
@@ -49,10 +49,10 @@ class Expression
     end
   end
 
-  class UnaryExpression
+  class Unary
     def initialize(variable_terminals, depth)
       @operator  = get_operator
-      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
+      @operand = ::Expression.create_operand(variable_terminals, depth)
     end
 
     def get_operator
@@ -60,7 +60,7 @@ class Expression
     end
 
     def to_s
-      "( " + @operator.to_s + " " + @operand_1.to_s + " )"
+      "( " + @operator.to_s + " " + @operand.to_s + " )"
     end
   end
 end
