@@ -6,7 +6,7 @@ class Expression
     elsif r < 0.67
       BinaryExpression.new(variable_terminals, depth)
     else
-      IfElseExpression.new(variable_terminals, depth)
+      TernaryExpression.new(variable_terminals, depth)
     end
   end
 
@@ -56,7 +56,7 @@ class Terminal
   end
 end
 
-class IfElseExpression < Expression
+class TernaryExpression < Expression
   def initialize(variable_terminals, depth)
     super
     @operand_2 = get_operand(variable_terminals, depth)
