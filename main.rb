@@ -1,10 +1,12 @@
 class Expression
   def self.create(variable_terminals=['x'], depth=0)
     r = rand
-    if r > 0.5
+    if r < 0.33
+      BinaryExpression.new(variable_terminals, depth)
+    elsif r < 0.67
       BinaryExpression.new(variable_terminals, depth)
     else
-      UnaryExpression.new(variable_terminals, depth)
+      IfElseExpression.new(variable_terminals, depth)
     end
   end
 
@@ -54,6 +56,21 @@ class Terminal
   end
 end
 
+class IfElseExpression < Expression
+  def initialize(variable_terminals, depth)
+    super
+    @operand_2 = get_operand(variable_terminals, depth)
+    @conditional = ConditionalExpression.new(variable_terminals, depth)
+  end
+
+  def get_operator
+  end
+
+  def to_s
+    "( " + @conditional.to_s + " ? " + @operand_1.to_s + " : " +  @operand_2.to_s + " )"
+  end
+end
+
 class BinaryExpression < Expression
   def initialize(variable_terminals, depth)
     super
@@ -69,6 +86,12 @@ class BinaryExpression < Expression
   end
 end
 
+class ConditionalExpression < BinaryExpression
+  def get_operator
+    ['<', '<=', '>', '>='].sample
+  end
+end
+
 class UnaryExpression < Expression
   def get_operator
     '-'
@@ -80,7 +103,7 @@ class UnaryExpression < Expression
 end
 
 10.times do
-  e = Expression.create(['x', 'y', 'z'])
+  e = Expression.create
   puts e.to_s
 end
 
