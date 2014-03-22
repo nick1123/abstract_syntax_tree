@@ -1,5 +1,11 @@
-class Expression
-  def initialize(variable_terminals=['x'], depth=0)
+module Expression
+  def self.create(variable_terminals=['x'], depth=0)
+    BinaryExpression.new(variable_terminals, depth)
+  end
+end
+
+class BinaryExpression
+  def initialize(variable_terminals, depth)
     @operator  = get_operator
     @operand_1 = get_operand(variable_terminals, depth)
     @operand_2 = get_operand(variable_terminals, depth)
@@ -13,7 +19,7 @@ class Expression
     if rand > (1/(2**depth) + 0.05)
       op = get_terminal(variable_terminals)
     else
-      op = Expression.new(variable_terminals, depth + 1)
+      op = Expression.create(variable_terminals, depth + 1)
     end
 
     return op
@@ -38,7 +44,7 @@ class Expression
 end
 
 10.times do
-  e = Expression.new(['x', 'y', 'z'])
+  e = Expression.create(['x', 'y', 'z'])
   puts e.to_s
 end
 
