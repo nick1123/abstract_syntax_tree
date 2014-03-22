@@ -1,8 +1,8 @@
 class Expression
   class Unary
     def initialize(variable_terminals, depth)
-      @operator  = get_operator
-      @operand = ::Expression.create_operand(variable_terminals, depth)
+      @operator = get_operator
+      @operand  = ::Expression.create_operand(variable_terminals, depth)
     end
 
     def get_operator
