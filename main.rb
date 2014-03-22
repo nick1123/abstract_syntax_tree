@@ -1,35 +1,6 @@
 Dir[File.dirname(__FILE__) + '/lib/*/*.rb'].each {|file| require file }
 
-class Expression
-  def self.create(variable_terminals=['x'], depth=0)
-    r = rand
-    if r < 0.33
-      BinaryExpression.new(variable_terminals, depth)
-    elsif r < 0.67
-      BinaryExpression.new(variable_terminals, depth)
-    else
-      TernaryExpression.new(variable_terminals, depth)
-    end
-  end
-
-  def initialize(variable_terminals, depth)
-    @operator  = get_operator
-    @operand_1 = get_operand(variable_terminals, depth)
-  end
-
-  def get_operand(variable_terminals, depth)
-    if rand > (1/(2**depth) + 0.05)
-      op = Terminal.new(variable_terminals)
-    else
-      op = Expression.create(variable_terminals, depth + 1)
-    end
-
-    return op
-  end
-
-end
-
-class TernaryExpression < Expression
+class TernaryExpression < Expression::Base
   def initialize(variable_terminals, depth)
     super
     @operand_2 = get_operand(variable_terminals, depth)
@@ -44,7 +15,7 @@ class TernaryExpression < Expression
   end
 end
 
-class BinaryExpression < Expression
+class BinaryExpression < Expression::Base
   def initialize(variable_terminals, depth)
     super
     @operand_2 = get_operand(variable_terminals, depth)
@@ -65,7 +36,7 @@ class ConditionalExpression < BinaryExpression
   end
 end
 
-class UnaryExpression < Expression
+class UnaryExpression < Expression::Base
   def get_operator
     '-'
   end
@@ -76,7 +47,7 @@ class UnaryExpression < Expression
 end
 
 10.times do
-  e = Expression.create
+  e = Expression::Base.create
   puts e.to_s
 end
 
