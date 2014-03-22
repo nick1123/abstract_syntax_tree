@@ -1,6 +1,11 @@
 class Expression
   def self.create(variable_terminals=['x'], depth=0)
-    BinaryExpression.new(variable_terminals, depth)
+    r = rand
+    if r > 0.5
+      BinaryExpression.new(variable_terminals, depth)
+    else
+      UnaryExpression.new(variable_terminals, depth)
+    end
   end
 
   def initialize(variable_terminals, depth)
@@ -61,6 +66,16 @@ class BinaryExpression < Expression
 
   def to_s
     "( " + @operand_1.to_s + " " + @operator.to_s + " " +  @operand_2.to_s + " )"
+  end
+end
+
+class UnaryExpression < Expression
+  def get_operator
+    '-'
+  end
+
+  def to_s
+    "( " + @operator.to_s + " " + @operand_1.to_s + " )"
   end
 end
 
