@@ -1,7 +1,23 @@
-module Expression
+class Expression
   def self.create(variable_terminals=['x'], depth=0)
     BinaryExpression.new(variable_terminals, depth)
   end
+
+  def initialize(variable_terminals, depth)
+    @operator  = get_operator
+    @operand_1 = get_operand(variable_terminals, depth)
+  end
+
+  def get_operand(variable_terminals, depth)
+    if rand > (1/(2**depth) + 0.05)
+      op = Terminal.new(variable_terminals)
+    else
+      op = Expression.create(variable_terminals, depth + 1)
+    end
+
+    return op
+  end
+
 end
 
 class Terminal
@@ -33,25 +49,14 @@ class Terminal
   end
 end
 
-class BinaryExpression
+class BinaryExpression < Expression
   def initialize(variable_terminals, depth)
-    @operator  = get_operator
-    @operand_1 = get_operand(variable_terminals, depth)
+    super
     @operand_2 = get_operand(variable_terminals, depth)
   end
 
   def get_operator
     ['+', '-', '*', '/', '**'].sample
-  end
-
-  def get_operand(variable_terminals, depth)
-    if rand > (1/(2**depth) + 0.05)
-      op = Terminal.new(variable_terminals)
-    else
-      op = Expression.create(variable_terminals, depth + 1)
-    end
-
-    return op
   end
 
   def to_s
