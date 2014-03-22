@@ -17,9 +17,10 @@ class Expression
     end
   end
 
-  class BinaryExpression < Expression::Base
+  class BinaryExpression
     def initialize(variable_terminals, depth)
-      super
+      @operator  = get_operator
+      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
       @operand_2 = ::Expression.create_operand(variable_terminals, depth)
     end
 
@@ -32,13 +33,28 @@ class Expression
     end
   end
 
-  class ConditionalExpression < BinaryExpression
+  class ConditionalExpression
+    def initialize(variable_terminals, depth)
+      @operator  = get_operator
+      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
+      @operand_2 = ::Expression.create_operand(variable_terminals, depth)
+    end
+
     def get_operator
       ['<', '<=', '>', '>='].sample
     end
+
+    def to_s
+      "( " + @operand_1.to_s + " " + @operator.to_s + " " +  @operand_2.to_s + " )"
+    end
   end
 
-  class UnaryExpression < Expression::Base
+  class UnaryExpression
+    def initialize(variable_terminals, depth)
+      @operator  = get_operator
+      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
+    end
+
     def get_operator
       '-'
     end
