@@ -13,18 +13,9 @@ class Expression
 
     def initialize(variable_terminals, depth)
       @operator  = get_operator
-      @operand_1 = get_operand(variable_terminals, depth)
+      @operand_1 = OperandCreator.create(variable_terminals, depth)
     end
 
-    def get_operand(variable_terminals, depth)
-      if rand > (1/(2**depth) + 0.05)
-        op = Terminal.new(variable_terminals)
-      else
-        op = Expression::Base.create(variable_terminals, depth + 1)
-      end
-
-      return op
-    end
   end
 end
 

@@ -3,7 +3,7 @@ Dir[File.dirname(__FILE__) + '/lib/*/*.rb'].each {|file| require file }
 class TernaryExpression < Expression::Base
   def initialize(variable_terminals, depth)
     super
-    @operand_2 = get_operand(variable_terminals, depth)
+    @operand_2 = ::Expression::OperandCreator.create(variable_terminals, depth)
     @conditional = ConditionalExpression.new(variable_terminals, depth)
   end
 
@@ -18,7 +18,7 @@ end
 class BinaryExpression < Expression::Base
   def initialize(variable_terminals, depth)
     super
-    @operand_2 = get_operand(variable_terminals, depth)
+    @operand_2 = ::Expression::OperandCreator.create(variable_terminals, depth)
   end
 
   def get_operator
