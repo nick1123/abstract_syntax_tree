@@ -1,13 +1,9 @@
-#Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
-
 require_relative 'expression/base.rb'
 require_relative 'expression/conditional.rb'
 require_relative 'expression/unary.rb'
 require_relative 'expression/binary.rb'
 require_relative 'expression/ternary.rb'
 require_relative 'expression/terminal.rb'
-
-
 
 class Expression
   def self.create(variable_terminals=['x'], depth=0)
@@ -42,8 +38,8 @@ class Expression
     return n
   end
 
-  def mutate
-    e = expressions.sample
+  def self.mutate(expression)
+    e = expression.expressions.sample
     e.build_elements
   end
 end

@@ -4,6 +4,9 @@ require_relative 'lib/expression.rb'
 10.times do
   e = Expression.create
   puts e.to_s
+  Expression.mutate(e)
+  puts e.to_s
+  puts ''
 end
 
 #e = Expression.create
