@@ -9,8 +9,12 @@ require_relative 'lib/expression.rb'
   puts ''
 end
 
-#e = Expression.create
-#puts e
+e = Expression.create
+puts e
+puts e.object_id
+e = Expression.clone(e)
+puts e
+puts e.object_id
 ##puts e.expressions
 #e.mutate
 #puts e

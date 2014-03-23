@@ -42,5 +42,9 @@ class Expression
     e = expression.expressions.sample
     e.build_elements
   end
+
+  def self.clone(expression)
+    Marshal.load(Marshal.dump(expression))
+  end
 end
 
