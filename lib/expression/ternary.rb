@@ -7,7 +7,7 @@ class Expression
     end
 
     def expressions
-      [self, @operand_1.expressions, @operand_2.expressions].flatten
+      [self, @conditional.expressions, @operand_1.expressions, @operand_2.expressions].flatten
     end
 
     def to_s
