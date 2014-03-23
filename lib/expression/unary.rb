@@ -9,10 +9,8 @@ class Expression
       '-'
     end
 
-    def child_expressions
-      results = []
-      results << @operand unless @operand.is_a?(::String)
-      return results
+    def expressions
+      [self, @operand.expressions].flatten
     end
 
     def to_s

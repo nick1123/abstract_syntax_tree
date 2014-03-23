@@ -4,8 +4,8 @@ class Expression
       @terminal = terminal
     end
 
-    def is_expression?
-      false
+    def expressions
+      []
     end
 
     def to_s
