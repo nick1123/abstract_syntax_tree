@@ -56,5 +56,20 @@ class Expression
   def self.short_signature(expression)
     signature(expression)[0..5]
   end
+
+  # Example
+  #   inputs_and_expected_output_hash = {inputs: {x: 2, y: 3}, expected_output: 99}
+  def self.score(inputs_and_expected_output_hash, expression)
+    expression_string = expression.to_s
+    inputs_and_expected_output_hash[:inputs].each do |variable, value|
+      expression_string.gsub!(variable.to_s, value.to_s)
+    end
+
+
+    the_score = nil
+    eval("the_score = #{expression_string}")
+    the_score *= the_score
+    return the_score
+  end
 end
 

@@ -1,15 +1,10 @@
 #Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each {|file| require file }
 
 require_relative 'lib/expression.rb'
-10.times do
-  e = Expression.create
-  puts e.to_s
-  Expression.mutate(e)
-  puts e.to_s
+4.times do
+  e = Expression.create(['x'])
+  puts e
+  puts Expression.score({inputs: {x: 2}, expected_output: 0}, e)
   puts ''
 end
 
-e = Expression.create
-puts e
-puts Expression.signature(e)
-puts Expression.short_signature(e)
