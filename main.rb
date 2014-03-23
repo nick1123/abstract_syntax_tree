@@ -11,10 +11,5 @@ end
 
 e = Expression.create
 puts e
-puts e.object_id
-e = Expression.clone(e)
-puts e
-puts e.object_id
-##puts e.expressions
-#e.mutate
-#puts e
+puts Expression.signature(e)
+puts Expression.short_signature(e)

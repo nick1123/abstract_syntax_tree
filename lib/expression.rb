@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 require_relative 'expression/base.rb'
 require_relative 'expression/conditional.rb'
 require_relative 'expression/unary.rb'
@@ -45,6 +47,14 @@ class Expression
 
   def self.clone(expression)
     Marshal.load(Marshal.dump(expression))
+  end
+
+  def self.signature(expression)
+    Digest::SHA1.hexdigest(expression.to_s)
+  end
+
+  def self.short_signature(expression)
+    signature(expression)[0..5]
   end
 end
 
