@@ -31,5 +31,15 @@ class Expression
     return n
   end
 
+  def initialize(variable_terminals, depth)
+    @variable_terminals = variable_terminals
+    @depth = depth
+    build_elements
+  end
+
+  def mutate
+    e = expressions.sample
+    e = ::Expression.create
+  end
 end
 

@@ -1,9 +1,9 @@
 class Expression
-  class Conditional
-    def initialize(variable_terminals, depth)
+  class Conditional < ::Expression
+    def build_elements
       @operator  = get_operator
-      @operand_1 = ::Expression.create_operand(variable_terminals, depth)
-      @operand_2 = ::Expression.create_operand(variable_terminals, depth)
+      @operand_1 = ::Expression.create_operand(@variable_terminals, @depth)
+      @operand_2 = ::Expression.create_operand(@variable_terminals, @depth)
     end
 
     def expressions

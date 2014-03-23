@@ -1,9 +1,9 @@
 class Expression
-  class Ternary
-    def initialize(variable_terminals, depth)
-      @conditional = ::Expression::Conditional.new(variable_terminals, depth)
-      @operand_1   = ::Expression.create_operand(variable_terminals, depth)
-      @operand_2   = ::Expression.create_operand(variable_terminals, depth)
+  class Ternary < ::Expression
+    def build_elements
+      @conditional = ::Expression::Conditional.new(@variable_terminals, @depth)
+      @operand_1   = ::Expression.create_operand(@variable_terminals, @depth)
+      @operand_2   = ::Expression.create_operand(@variable_terminals, @depth)
     end
 
     def expressions
