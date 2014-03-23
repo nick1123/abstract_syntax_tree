@@ -9,6 +9,12 @@ class Expression
       '-'
     end
 
+    def child_expressions
+      results = []
+      results << @operand unless @operand.is_a?(::String)
+      return results
+    end
+
     def to_s
       "( " + @operator.to_s + " " + @operand.to_s + " )"
     end
