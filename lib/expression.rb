@@ -1,5 +1,12 @@
 #Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
 
+require_relative 'expression/base.rb'
+require_relative 'expression/conditional.rb'
+require_relative 'expression/unary.rb'
+require_relative 'expression/binary.rb'
+require_relative 'expression/ternary.rb'
+require_relative 'expression/terminal.rb'
+
 
 
 class Expression
