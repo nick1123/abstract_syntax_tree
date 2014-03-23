@@ -39,7 +39,7 @@ class Expression
 
   def mutate
     e = expressions.sample
-    e = ::Expression.create
+    e.build_elements
   end
 end
 

@@ -7,4 +7,6 @@ Dir[File.dirname(__FILE__) + '/lib/**/*.rb'].each {|file| require file }
 
 e = Expression.create
 puts e
-puts e.expressions
+#puts e.expressions
+e.mutate
+puts e
