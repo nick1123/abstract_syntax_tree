@@ -1,3 +1,7 @@
+#Dir[File.dirname(__FILE__) + '/*.rb'].each {|file| require file }
+
+
+
 class Expression
   def self.create(variable_terminals=['x'], depth=0)
     r = rand
@@ -29,12 +33,6 @@ class Expression
     n = (10 * rand).round(1)
     n *= -1 if rand > 0.5
     return n
-  end
-
-  def initialize(variable_terminals, depth)
-    @variable_terminals = variable_terminals
-    @depth = depth
-    build_elements
   end
 
   def mutate

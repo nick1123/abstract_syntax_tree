@@ -1,5 +1,5 @@
 class Expression
-  class Conditional < ::Expression
+  class Conditional < ::Expression::Base
     def build_elements
       @operator  = get_operator
       @operand_1 = ::Expression.create_operand(@variable_terminals, @depth)

@@ -1,5 +1,5 @@
 class Expression
-  class Binary < ::Expression
+  class Binary < ::Expression::Base
     def build_elements
       @operator  = get_operator
       @operand_1 = ::Expression.create_operand(@variable_terminals, @depth)
