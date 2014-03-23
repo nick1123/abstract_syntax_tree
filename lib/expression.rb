@@ -65,10 +65,14 @@ class Expression
       expression_string.gsub!(variable.to_s, value.to_s)
     end
 
-
     the_score = nil
-    eval("the_score = #{expression_string}")
-    the_score *= the_score
+    begin
+      eval("the_score = #{expression_string}")
+      the_score *= the_score
+    rescue Exception => e
+      the_score = 1_000_000_000
+    end
+
     return the_score
   end
 end
