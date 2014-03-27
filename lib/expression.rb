@@ -32,6 +32,15 @@ class Expression
     return op
   end
 
+  def self.get_tournament_winner(expression_1, score_1, expression_2, score_2)
+    expression_1_odds_of_winning = 1 - (score_1 / (score_1 + score_2))
+    if expression_1_odds_of_winning >= rand
+      return expression_1
+    else
+      return expression_2
+    end
+  end
+
   def self.create_terminal(variable_terminals)
     value = (rand > 0.5 ? variable_terminals.sample : create_float.to_s)
     return ::Expression::Terminal.new(value)
