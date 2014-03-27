@@ -81,10 +81,12 @@ class Expression
     the_score = nil
     begin
       eval("the_score = #{expression_string}")
-      the_score *= the_score
+      the_score *= the_score.to_f
     rescue Exception => e
-      the_score = 1_000_000_000
+      the_score = 1_000_000_000.0
     end
+
+    the_score = 1_000_000_000.0 if the_score.infinite?
 
     return the_score
   end
