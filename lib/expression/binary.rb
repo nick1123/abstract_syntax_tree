@@ -11,7 +11,7 @@ class Expression
     end
 
     def get_operator
-      ['+', '-', '*', '/', '**'].sample
+      ['+', '-', '*', '/', '**', '%'].sample
     end
 
     def to_s
