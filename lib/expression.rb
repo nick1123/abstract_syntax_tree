@@ -3,6 +3,7 @@ require 'digest/sha1'
 require_relative 'expression/base.rb'
 require_relative 'expression/conditional.rb'
 require_relative 'expression/unary.rb'
+require_relative 'expression/method.rb'
 require_relative 'expression/binary.rb'
 require_relative 'expression/ternary.rb'
 require_relative 'expression/terminal.rb'
@@ -10,10 +11,12 @@ require_relative 'expression/terminal.rb'
 class Expression
   def self.create(variable_terminals=['x'], depth=0)
     r = rand
-    if r < 0.33
+    if r < 0.25
       ::Expression::Unary.new(variable_terminals, depth)
-    elsif r < 0.67
+    elsif r < 0.50
       ::Expression::Binary.new(variable_terminals, depth)
+    elsif r < 0.75
+      ::Expression::Method.new(variable_terminals, depth)
     else
       ::Expression::Ternary.new(variable_terminals, depth)
     end
@@ -58,7 +61,7 @@ class Expression
   end
 
   # Example
-  #   inputs_and_expected_outputs_array = 
+  #   inputs_and_expected_outputs_array =
   #   [
   #     {inputs: {x: 2, y: 3}, expected_output: 99},
   #     {inputs: {x: 3, y: 4}, expected_output: 44},
@@ -71,7 +74,8 @@ class Expression
   end
 
   # Example
-  #   inputs_and_expected_output_hash = {inputs: {x: 2, y: 3}, expected_output: 99}
+  #   inputs_and_expected_output_hash =
+  #     {inputs: {x: 2, y: 3}, expected_output: 99}
   def self.score_single(inputs_and_expected_output_hash, expression)
     expression_string = expression.to_s
     inputs_and_expected_output_hash[:inputs].each do |variable, value|
