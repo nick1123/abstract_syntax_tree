@@ -3,15 +3,14 @@
 require_relative 'lib/expression.rb'
 require_relative 'lib/input_data.rb'
 
-input_data_first = ::InputData.always_0[4]
 puts "***************"
-puts input_data_first
+puts ::InputData.always_0
 puts "***************"
 
 4.times do
   e = Expression.create(['x'])
   puts e
-  puts Expression.score(input_data_first, e)
+  puts Expression.score(::InputData.always_0, e)
   puts ''
 end
 

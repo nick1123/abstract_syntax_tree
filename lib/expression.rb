@@ -58,8 +58,21 @@ class Expression
   end
 
   # Example
+  #   inputs_and_expected_outputs_array = 
+  #   [
+  #     {inputs: {x: 2, y: 3}, expected_output: 99},
+  #     {inputs: {x: 3, y: 4}, expected_output: 44},
+  #     {inputs: {x: 5, y: 6}, expected_output: 77}
+  #   ]
+  def self.score(inputs_and_expected_outputs_array, expression)
+    inputs_and_expected_outputs_array.map do |inputs_and_expected_output_hash|
+      score_single(inputs_and_expected_output_hash, expression)
+    end.inject(0, :+) / inputs_and_expected_outputs_array.size
+  end
+
+  # Example
   #   inputs_and_expected_output_hash = {inputs: {x: 2, y: 3}, expected_output: 99}
-  def self.score(inputs_and_expected_output_hash, expression)
+  def self.score_single(inputs_and_expected_output_hash, expression)
     expression_string = expression.to_s
     inputs_and_expected_output_hash[:inputs].each do |variable, value|
       expression_string.gsub!(variable.to_s, value.to_s)
