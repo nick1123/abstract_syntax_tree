@@ -9,6 +9,20 @@ require_relative 'expression/ternary.rb'
 require_relative 'expression/terminal.rb'
 
 class Expression
+  def self.cross_expressions(expression_1, expression_2)
+    puts "-----------------"
+    puts expression_1
+    puts ''
+    puts expression_1.expressions.sample
+    puts ''
+    puts ''
+    puts expression_2
+    puts ''
+    puts expression_2.expressions.sample
+    puts ''
+    puts ''
+  end
+
   def self.create(variable_terminals=['x'], depth=0)
     r = rand
     if r < 0.25
@@ -23,13 +37,17 @@ class Expression
   end
 
   def self.create_operand(variable_terminals, depth)
-    if rand > (1/(2**depth) + 0.05)
+    if should_create_terminal?(depth)
       op = create_terminal(variable_terminals)
     else
       op = ::Expression.create(variable_terminals, depth + 1)
     end
 
     return op
+  end
+
+  def self.should_create_terminal?(depth)
+    rand > (1/(2**depth) + 0.15)
   end
 
   def self.get_tournament_winner(expression_1, score_1, expression_2, score_2)
