@@ -2,7 +2,7 @@ class Expression
   class Method < ::Expression::Base
     def build_elements
       @operator = get_operator
-      @operand  = ::Expression.create_operand(@variable_terminals, @depth)
+      @operand  = ::Expression.create_operand(@variable_terminals, @depth, self)
     end
 
     def get_operator

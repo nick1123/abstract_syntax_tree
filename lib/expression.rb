@@ -23,24 +23,24 @@ class Expression
     puts ''
   end
 
-  def self.create(variable_terminals=['x'], depth=0)
+  def self.create(variable_terminals, depth, parent_expression)
     r = rand
     if r < 0.25
-      ::Expression::Unary.new(variable_terminals, depth)
+      ::Expression::Unary.new(variable_terminals, depth, parent_expression)
     elsif r < 0.50
-      ::Expression::Binary.new(variable_terminals, depth)
+      ::Expression::Binary.new(variable_terminals, depth, parent_expression)
     elsif r < 0.75
-      ::Expression::Method.new(variable_terminals, depth)
+      ::Expression::Method.new(variable_terminals, depth, parent_expression)
     else
-      ::Expression::Ternary.new(variable_terminals, depth)
+      ::Expression::Ternary.new(variable_terminals, depth, parent_expression)
     end
   end
 
-  def self.create_operand(variable_terminals, depth)
+  def self.create_operand(variable_terminals, depth, parent_expression)
     if should_create_terminal?(depth)
       op = create_terminal(variable_terminals)
     else
-      op = ::Expression.create(variable_terminals, depth + 1)
+      op = ::Expression.create(variable_terminals, depth + 1, parent_expression)
     end
 
     return op
